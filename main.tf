@@ -24,7 +24,7 @@ resource "docker_container" "snapcart" {
 
   ports {
     internal = 3000
-    external = 8080
+    external = 3000
   }
 }
 
