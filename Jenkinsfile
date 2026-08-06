@@ -6,25 +6,15 @@ pipeline {
                 checkout scm
             }
         }
-        stage('Terraform Init') {
+        stage('Docker Build') {
             steps {
-                sh 'terraform init'
-            }
-        }
-        stage('Terraform Plan') {
-            steps {
-                sh 'terraform plan'
-            }
-        }
-        stage('Terraform Apply') {
-            steps {
-                sh 'terraform apply -auto-approve'
+                sh 'docker build -t snapcart:v1 .'
             }
         }
     }
     post {
         success {
-            echo 'SnapCart provisioned by Terraform via Jenkins.'
+            echo 'SnapCart image built successfully.'
         }
         failure {
             echo 'Pipeline failed. Check the console output.'
